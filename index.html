@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="CSS/style.css">
+<title>STUNT LAB — ULTIMATE</title>
+
+</head>
+<body>
+
+<div class="loading-bar" id="loadingBar"></div>
+
+<header id="header">
+<div class="logo" onclick="go('home')">STUNT LAB <span>ULTIMATE</span></div>
+<button class="mobile-toggle" onclick="document.querySelector('.nav').classList.toggle('open')">☰</button>
+<div class="nav">
+<a onclick="go('home')" class="active" data-page="home">Главная</a>
+<a onclick="go('shop')" data-page="shop">Магазин</a>
+<a onclick="go('gallery')" data-page="gallery">Галерея</a>
+<a onclick="go('dashboard')" data-page="dashboard">Дашборд</a>
+<a onclick="go('account')" data-page="account">Аккаунт</a>
+<span class="cartBtn" onclick="toggleCart()"><span class="badge" id="count">0</span></span>
+</div>
+</header>
+
+<div id="overlay" onclick="toggleCart()"></div>
+
+<div id="cart">
+<div class="cart-header">
+<h2>Корзина</h2>
+<button class="cart-close" onclick="toggleCart()">✕</button>
+</div>
+<div class="cart-body" id="cartBody"></div>
+<div class="cart-footer" id="cartFooter"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- HOME -->
+<section id="home" class="page active">
+<div class="hero">
+<div class="hero-content">
+<h1 class="animate-in">ULTIMATE<br><em>STUNT</em> BRAND</h1>
+<p class="animate-in delay-1">Полная экосистема: магазин сборок, запчасти, аксессуары, аналитика и управление аккаунтом</p>
+<div class="animate-in delay-2">
+<button class="btn" onclick="go('shop')">Перейти в магазин</button>
+<button class="btn btn-outline" style="margin-left:12px" onclick="go('gallery')">Галерея</button>
+</div>
+<div class="hero-stats animate-in delay-3">
+<div class="hero-stat"><div class="num">250+</div><div class="label">Сборок</div></div>
+<div class="hero-stat"><div class="num">1.2K</div><div class="label">Клиентов</div></div>
+<div class="hero-stat"><div class="num">5★</div><div class="label">Рейтинг</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SHOP -->
+<section id="shop" class="page">
+<h2 class="title">Магазин <em>сборок</em></h2>
+<p class="subtitle">Готовые проекты для станта и трюков</p>
+<div class="grid" id="grid"></div>
+
+<div class="featured-section" style="margin-top:80px">
+<h2 class="title">Запчасти и <em>аксессуары</em></h2>
+<p class="subtitle">Кастомные компоненты для вашей сборки</p>
+<div class="parts-grid" id="partsGrid"></div>
+</div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="page">
+<h2 class="title">Галерея <em>проектов</em></h2>
+<p class="subtitle">Лучшие работы нашей студии</p>
+<div class="gallery" id="galleryGrid"></div>
+
+<h2 class="title" style="margin-top:80px">Отзывы <em>клиентов</em></h2>
+<div class="reviews">
+<div class="review">
+<div class="stars">★★★★★</div>
+<div class="text">Крутейшая сборка Aerox! Мотор настроен идеально, подвеска работает как часы. Рекомендую STUNT LAB всем кто занимается стантом.</div>
+<div class="author">— Алексей М.</div>
+</div>
+<div class="review">
+<div class="stars">★★★★★</div>
+<div class="text">Заказывал KTM EXC 500 под супермото. Ребята сделали всё на высшем уровне. Качество сборки — топ.</div>
+<div class="author">— Дмитрий К.</div>
+</div>
+<div class="review">
+<div class="stars">★★★★★</div>
+<div class="text">Husqvarna 701 — просто зверь. Отличная управляемость и мощь. Спасибо команде за профессиональный подход!</div>
+<div class="author">— Иван Р.</div>
+</div>
+</div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page">
+<h2 class="title">Аналитика</h2>
+<p class="subtitle">Обзор активности и статистика</p>
+<div class="dashboard">
+<div class="row">
+<div class="box"><div class="icon"></div><div class="label">Заказы</div><div class="val green" id="orders">0</div></div>
+<div class="box"><div class="icon">💰</div><div class="label">Выручка</div><div class="val green" id="revenue">$0</div></div>
+<div class="box"><div class="icon">👥</div><div class="label">Клиенты</div><div class="val green">1</div></div>
+<div class="box"><div class="icon">⭐</div><div class="label">Рейтинг</div><div class="val green">5.0</div></div>
+</div>
+</div>
+<div class="viewer">
+<img src="https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/1ed804c48-0389-4056-be78-bcca642eda9c.png" alt="3D viewer">
+<div class="viewer-text">3D VIEWER — ВРАЩАЙТЕ МОДЕЛЬ</div>
+</div>
+</section>
+
+<!-- ACCOUNT -->
+<section id="account" class="page">
+<h2 class="title">Аккаунт</h2>
+<p class="subtitle">Вход или регистрация</p>
+<div class="account-form">
+<input id="login" placeholder="Email или логин">
+<input id="pass" placeholder="Пароль" type="password">
+<button class="btn" onclick="doLogin()">Войти</button>
+<p style="color:#444;font-size:12px;margin-top:12px;text-align:center">Или <a style="color:#7CFF00;cursor:pointer;text-decoration:underline" onclick="alert('Регистрация (mock)')">зарегистрируйтесь</a></p>
+</div>
+<div class="dashboard" style="margin-top:40px">
+<h3 style="margin-bottom:16px;font-size:16px">Мои заказы</h3>
+<div id="myOrders"><p style="color:#444;font-size:13px">У вас пока нет заказов</p></div>
+</div>
+</section>
+
+<footer>
+<div class="col">
+<h4>STUNT LAB</h4>
+<a href="#">О нас</a>
+<a href="#">Контакты</a>
+<a href="#">Карьера</a>
+</div>
+<div class="col">
+<h4>Магазин</h4>
+<a href="#">Сборки</a>
+<a href="#">Запчасти</a>
+<a href="#">Аксессуары</a>
+</div>
+<div class="col">
+<h4>Поддержка</h4>
+<a href="#">FAQ</a>
+<a href="#">Доставка</a>
+<a href="#">Возврат</a>
+</div>
+<div class="col">
+<h4>Соцсети</h4>
+<a href="#">Instagram</a>
+<a href="#">YouTube</a>
+<a href="#">Telegram</a>
+</div>
+<div class="copy">© 2026 STUNT LAB ULTIMATE. Все права защищены.</div>
+</footer>
+
+<script>
+let cart=JSON.parse(localStorage.getItem('sl_cart')||'[]');
+let orderHistory=JSON.parse(localStorage.getItem('sl_orders')||'[]');
+let isLoggedIn=localStorage.getItem('sl_logged')==='true';
+
+const products=[
+{name:'Yamaha Aerox 155 Build',price:4900,img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/13bb9ed3f-a4a8-4147-97ee-1e80b2c9e22e.png',tag:'ХИТ',desc:'Кастомная сборка Aerox с улучшенным мотором, тюнингованной подвеской и агрессивным обвесом.'},
+{name:'KTM EXC 500 Supermoto',price:11800,img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/1a02a1da7-3fdc-4291-8a04-033aaf8d983d.png',tag:'NEW',desc:'Мощный эндуро под супермото. Полностью кастомная настройка для станта и трюков.'},
+{name:'Husqvarna 701 Custom',price:14900,img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/12ab473d6-fbb3-4425-a896-1b17c021dd86.png',tag:'PREMIUM',desc:'Премиальная сборка на базе Husqvarna 701. Идеальный баланс мощности и управляемости.'},
+{name:'Ducati Monster Stunt',price:18500,img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/1ed804c48-0389-4056-be78-bcca642eda9c.png',tag:'EXCLUSIVE',desc:'Эксклюзивная стунт-сборка на базе Ducati Monster. Карбоновые элементы, неон-подсветка.'}
+];
+
+const parts=[
+{name:'Выхлопная система Akrapovič',price:890,img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/1056ef24f-b5ed-439f-a210-3ea70e8c6d30.png'},
+{name:'Набор тюнинга подвески',price:1200,img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/13d8301e3-df5e-4fe7-b2bd-b936f3594d87.png'},
+{name:'Кастомный обвес карбон',price:2100,img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/1ed804c48-0389-4056-be78-bcca642eda9c.png'},
+{name:'Неон-комплект подсветки',price:350,img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/13bb9ed3f-a4a8-4147-97ee-1e80b2c9e22e.png'}
+];
+
+const galleryItems=[
+{img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/13d8301e3-df5e-4fe7-b2bd-b936f3594d87.png',title:'Мастерская STUNT LAB'},
+{img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/1056ef24f-b5ed-439f-a210-3ea70e8c6d30.png',title:'Детали двигателя'},
+{img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/1ed804c48-0389-4056-be78-bcca642eda9c.png',title:'Ducati Monster кастом'},
+{img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/13bb9ed3f-a4a8-4147-97ee-1e80b2c9e22e.png',title:'Yamaha Aerox проект'},
+{img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/1a02a1da7-3fdc-4291-8a04-033aaf8d983d.png',title:'KTM EXC 500 сборка'},
+{img:'https://image.qwenlm.ai/public_source/df63351b-ec76-489e-a6b3-f7e415b87fd8/12ab473d6-fbb3-4425-a896-1b17c021dd86.png',title:'Husqvarna 701 финал'}
+];
+
+function renderShop(){
+let g=document.getElementById('grid');g.innerHTML='';
+products.forEach((p,idx)=>{
+g.innerHTML+=`<div class="card animate-in" style="animation-delay:${idx*0.1}s;opacity:0">
+<div class="img-wrap"><img src="${p.img}" alt="${p.name}"><div class="tag">${p.tag}</div></div>
+<div class="info">
+<h3>${p.name}</h3>
+<div class="desc">${p.desc}</div>
+<div class="price-row">
+<div class="price">$${p.price.toLocaleString()}</div>
+</div>
+<div class="card-actions">
+<button class="btn btn-sm" onclick="add('${p.name.replace(/'/g,"\\'")}',${p.price},'${p.img}')">В корзину</button>
+<button class="btn btn-sm btn-outline" onclick="quickView('${p.name.replace(/'/g,"\\'")}','${p.desc}','$${p.price.toLocaleString()}')">Подробнее</button>
+</div>
+</div></div>`;
+});
+
+let pg=document.getElementById('partsGrid');pg.innerHTML='';
+parts.forEach((p,idx)=>{
+pg.innerHTML+=`<div class="part-card animate-in" style="animation-delay:${(idx+products.length)*0.1}s;opacity:0">
+<img src="${p.img}" alt="${p.name}">
+<div class="info">
+<h4>${p.name}</h4>
+<div class="price">$${p.price.toLocaleString()}</div>
+<button class="btn btn-sm" style="margin-top:10px;width:100%" onclick="add('${p.name.replace(/'/g,"\\'")}',${p.price},'${p.img}')">В корзину</button>
+</div></div>`;
+});
+
+let gg=document.getElementById('galleryGrid');gg.innerHTML='';
+galleryItems.forEach((item,idx)=>{
+gg.innerHTML+=`<div class="gallery-item animate-in" style="animation-delay:${idx*0.1}s;opacity:0">
+<img src="${item.img}" alt="${item.title}">
+<div class="overlay"><h4>${item.title}</h4></div>
+</div>`;
+});
+}
+
+function add(name,price,img){
+let i=cart.find(x=>x.name===name);
+if(i)i.qty++; else cart.push({name,price,qty:1,img:img||''});
+save();toast('✓ Добавлено в корзину');updateCart();
+let badge=document.getElementById('count');badge.classList.remove('bump');void badge.offsetWidth;badge.classList.add('bump');
+}
+
+function updateCart(){
+let body=document.getElementById('cartBody');
+let footer=document.getElementById('cartFooter');
+let totalItems=cart.reduce((s,i)=>s+i.qty,0);
+
+document.getElementById('count').innerText=totalItems;
+
+if(cart.length===0){
+body.innerHTML='<div class="cart-empty"><div class="icon">🛒</div><p>Корзина пуста</p></div>';
+footer.innerHTML='';return;
+}
+
+let total=0;
+let html='';
+cart.forEach((item,idx)=>{
+total+=item.price*item.qty;
+html+=`<div class="cart-item">
+${item.img?`<img src="${item.img}" alt="">`:''}
+<div class="cart-item-info">
+<h4>${item.name}</h4>
+<div class="price">$${item.price.toLocaleString()}</div>
+</div>
+<div class="qty-ctrl">
+<button onclick="minus(${idx})">−</button>
+<span>${item.qty}</span>
+<button onclick="plus(${idx})">+</button>
+</div>
+</div>`;
+});
+body.innerHTML=html;
+
+footer.innerHTML=`
+<div class="total-row"><span>Итого:</span><span class="val">$${total.toLocaleString()}</span></div>
+<button class="btn" style="width:100%" onclick="checkout()">Оформить заказ</button>
+<button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="clearCart()">Очистить корзину</button>
+`;
+}
+
+function plus(i){cart[i].qty++;save();updateCart();}
+function minus(i){cart[i].qty--;if(cart[i].qty<=0)cart.splice(i,1);save();updateCart();}
+function save(){localStorage.setItem('sl_cart',JSON.stringify(cart));}
+function clearCart(){cart=[];save();updateCart();}
+
+function toggleCart(){
+let c=document.getElementById('cart');
+let o=document.getElementById('overlay');
+c.classList.toggle('open');
+o.style.opacity=c.classList.contains('open')?'1':'0';
+o.style.pointerEvents=c.classList.contains('open')?'auto':'none';
+}
+
+function checkout(){
+if(cart.length===0)return;
+let total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+let order={date:new Date().toLocaleDateString('ru-RU'),items:[...cart],total};
+orderHistory.push(order);
+localStorage.setItem('sl_orders',JSON.stringify(orderHistory));
+
+let msg=`Заказ оформлен!\nСумма: $${total.toLocaleString()}\nПозиций: ${cart.reduce((s,i)=>s+i.qty,0)}\n\n(Демо — Stripe mock)`;
+alert(msg);
+
+cart=[];save();updateCart();updateDash();renderOrders();
+toast('✓ Заказ оформлен!');
+toggleCart();
+}
+
+function quickView(name,desc,price){
+alert(`${name}\n${desc}\n\nЦена: ${price}`);
+}
+
+function doLogin(){
+let login=document.getElementById('login').value;
+let pass=document.getElementById('pass').value;
+if(!login||!pass){toast(' Заполните все поля');return;}
+localStorage.setItem('sl_logged','true');
+isLoggedIn=true;
+toast('✓ Добро пожаловать, '+login+'!');
+renderOrders();
+}
+
+function renderOrders(){
+let el=document.getElementById('myOrders');
+if(orderHistory.length===0){el.innerHTML='<p style="color:#444;font-size:13px">У вас пока нет заказов</p>';return;}
+let html='';
+orderHistory.forEach((o,i)=>{
+html+=`<div style="background:#111;border-radius:10px;padding:14px;margin-bottom:10px">
+<div style="display:flex;justify-content:space-between;margin-bottom:8px">
+<span style="font-size:12px;color:#7CFF00;font-weight:700">Заказ #${i+1}</span>
+<span style="font-size:12px;color:#555">${o.date}</span>
+</div>
+<div style="font-size:13px;color:#aaa">${o.items.map(x=>x.name+' ×'+x.qty).join(', ')}</div>
+<div style="font-size:16px;font-weight:800;color:#7CFF00;margin-top:8px">$${o.total.toLocaleString()}</div>
+</div>`;
+});
+el.innerHTML=html;
+}
+
+function updateDash(){
+document.getElementById('orders').innerText=orderHistory.length;
+let rev=orderHistory.reduce((s,o)=>s+o.total,0);
+document.getElementById('revenue').innerText='$'+rev.toLocaleString();
+}
+
+function toast(msg){
+let t=document.getElementById('toast');t.innerText=msg;t.classList.add('show');
+setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+function go(p){
+document.querySelectorAll('.page').forEach(x=>{x.classList.remove('active');});
+let target=document.getElementById(p);
+target.classList.add('active');
+document.querySelectorAll('.nav a[data-page]').forEach(a=>{
+a.classList.toggle('active',a.dataset.page===p);
+});
+document.querySelector('.nav').classList.remove('open');
+window.scrollTo({top:0,behavior:'smooth'});
+if(p==='shop')renderShop();
+if(p==='dashboard')updateDash();
+if(p==='account')renderOrders();
+}
+
+window.addEventListener('scroll',()=>{
+let h=document.getElementById('header');
+h.classList.toggle('scrolled',window.scrollY>50);
+});
+
+window.addEventListener('load',()=>{
+let bar=document.getElementById('loadingBar');
+bar.style.width='100%';
+setTimeout(()=>bar.style.opacity='0',300);
+});
+
+renderShop();updateCart();updateDash();renderOrders();
+</script>
+
+</body>
+</html>
+
